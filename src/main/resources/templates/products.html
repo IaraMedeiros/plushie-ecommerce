@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<table>
+    <div>
+        <table class="table table-bordered ">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="product : ${listProducts}">
+                <tr>
+                    <td>[[${product.id}]]</td>
+                    <td>[[${product.name}]]</td>
+                    <td>[[${product.description}]]</td>
+                    <td>[[${product.price}]]</td>
+                </tr>
+            </th:block>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</table>
+</body>
+</html>
