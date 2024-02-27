@@ -1,38 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
 <body>
-<table>
-    <div>
-        <table class="table table-bordered ">
-            <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="product : ${listProducts}">
-                <tr>
-                    <td>[[${product.id}]]</td>
-                    <td>[[${product.name}]]</td>
-                    <td>[[${product.description}]]</td>
-                    <td>[[${product.price}]]</td>
-                </tr>
-            </th:block>
 
-            </tbody>
-
-        </table>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" th:each="product : ${listProducts}">
+            <div class="card mb-4 shadow-sm">
+                <img  th:src="@{'/product/image/' + ${product.id}}" class="card-img-top" alt="Imagem do Produto">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.name}"></h5>
+                    <p class="card-text" th:text="'Preço: R$ ' + ${product.price}"></p>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-</table>
 </body>
 </html>

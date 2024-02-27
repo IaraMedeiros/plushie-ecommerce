@@ -20,10 +20,12 @@ public class Product {
     @Column(nullable = false, unique = false)
 
     private Double price;
-    @Column(nullable = true, unique = true)
 
     @Lob
+    @Column(columnDefinition = "MEDIUMBLOB",nullable = true, unique = true)
     private byte[] img;
+
+
     @Column(nullable = false, unique = false)
 
     private String color;
