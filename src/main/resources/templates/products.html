@@ -7,19 +7,55 @@
 </head>
 <body>
 
-<div class="container">
+<header  style="margin-bottom: 20px;">
+    <nav class="navbar navbar-light">
+        <a class="navbar-brand m-auto" href="products.html">
+            <img src="https://i.imgur.com/p6ijYps.png" width="300" height="85" class="d-inline-block align-top" alt="">
+        </a>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav m-auto" style=" font-size: 16px; color: #D98C5F;">
+                <a class="nav-item nav-link ml-5" href="#" style="color: #733E1F;">Inicio</a>
+                <a class="nav-item nav-link ml-5 " href="#" style="color: #733E1F;">Pelucias</a>
+                <a class="nav-item nav-link ml-5" href="#" style="color: #733E1F;">Chaveiros</a>
+                <a class="nav-item nav-link ml-5" href="#" style="color: #733E1F;">Contato</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-4" th:each="product : ${listProducts}">
-            <div class="card mb-4 shadow-sm">
-                <img  th:src="@{'/product/image/' + ${product.id}}" class="card-img-top" alt="Imagem do Produto">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${product.name}"></h5>
-                    <p class="card-text" th:text="'Preço: R$ ' + ${product.price}"></p>
+        <div class="col-md-2 col-sm-4 sidenav" style=" padding: 20px; color: black;">
+            <h2>Filtros</h2>
+            <a class="nav-item nav-link mb-2" href="#" >Mais populares</a>
+            <a class="nav-item nav-link mb-2" href="#" >Menor preco</a>
+            <a class="nav-item nav-link mb-2" href="#" >Maior preco</a>
+            <a class="nav-item nav-link mb-2" href="#" >Mais recente</a>
+        </div>
+
+        <div class="col-md-7 col-sm-1 main" style="margin-left: 7vw">
+            <div class="row">
+                <div class="col-md-3" th:each="product, iterStat : ${listProducts}" th:if="${iterStat.index < 20}">
+                    <div class="product-card">
+                        <img th:src="@{'/product/image/' + ${product.id}}" alt="Imagem do Produto" class="card-img-top">
+                        <div class="card-body  align-content-center">
+                            <h5 class="card-title text-center" th:text="${product.name}" style="color: #733E1F; font-weight: lighter"></h5>
+                            <p class="card-text text-center" th:text="'R$ ' + ${product.price} "style="color: #733E1F; font-weight: bold"></p>
+                            <button type="button" class="btn btn-outline-dark">Comprar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
+
 </body>
+
 </html>
+
+

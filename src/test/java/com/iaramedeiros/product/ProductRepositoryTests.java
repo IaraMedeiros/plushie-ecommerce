@@ -26,10 +26,10 @@ public class ProductRepositoryTests {
     public void testAddNew() throws IOException {
 
         // Carregar a imagem do arquivo
-        File filePug = new File("C:\\Users\\iara3\\IdeaProjects\\CrudWebSpring\\src\\main\\resources\\images12\\pug.jpg");
-        byte[] imgBytesPug = Files.readAllBytes(filePug.toPath());
+        File file = new File("C:\\Users\\iara3\\IdeaProjects\\CrudWebSpring\\src\\main\\resources\\images\\raccoon.png");
+        byte[] imgBytes = Files.readAllBytes(file.toPath());
 
-        Product product2 = new Product(null,"Pug4", "Um pug", 50.0,imgBytesPug,"Beige", "Small");
+        Product product2 = new Product(null,"Guaxinim", "Um lindo e fofo guaxinim, adorável!", 55.0,imgBytes,"gray", "Small");
 
         // Salvar o produto no banco de dados
         Product savedProduct = repo.save(product2);
@@ -41,7 +41,7 @@ public class ProductRepositoryTests {
         assertThat(savedProduct).isNotNull();
         assertThat(savedProduct.getId()).isNotNull();
         assertThat(savedProduct.getId()).isGreaterThan(0);
-        assertThat(retrievedProduct.getImg().length).isEqualTo(imgBytesPug.length);
+        assertThat(retrievedProduct.getImg().length).isEqualTo(imgBytes.length);
 
     }
 }

@@ -26,7 +26,7 @@ public class Product {
     private byte[] img;
 
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
 
     private String color;
     @Column(nullable = false, unique = false)

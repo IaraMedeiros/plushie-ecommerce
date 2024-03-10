@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class ProductController {
 
     }
 
-    @GetMapping("product/{id}/delete")
+    @GetMapping("product/delete/{id}")
     public String deleteProduct(@PathVariable Integer id, RedirectAttributes ra ){
         try {
             service.delete(id);
@@ -46,4 +47,17 @@ public class ProductController {
         }
         return "redirect:/products";
     }
+
+    @GetMapping("/products/filter")
+    public ResponseEntity<List<Product>> filterByPriceRange(@RequestParam(name = "minPrice") Double minPrice, @RequestParam(name = "maxPrice") Double maxPrice) {
+        List<Product> productList = service.ListByPriceRange(minPrice, maxPrice);
+        return ResponseEntity.ok().body(productList);
+    }
+
+    @GetMapping("/products/orderBy")
+    public ResponseEntity<List<Product>> orderByCriteria(@RequestParam(name = "type") String type) {
+        List<Product> productList = service.orderByCriteria(type);
+        return ResponseEntity.ok().body(productList);
+    }
+
 }
