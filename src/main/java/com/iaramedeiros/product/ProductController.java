@@ -55,8 +55,15 @@ public class ProductController {
     }
 
     @GetMapping("/products/orderBy")
-    public ResponseEntity<List<Product>> orderByCriteria(@RequestParam(name = "type") String type) {
+    public ResponseEntity<List<Product>> orderByCriteria(@RequestParam(name = "type") Integer type) {
         List<Product> productList = service.orderByCriteria(type);
+        System.out.println("NO CONTROLLER IMPRIME ISSOAAAAAAAAAAAAAAAAAAA" + productList);
+        return ResponseEntity.ok().body(productList);
+    }
+
+    @GetMapping("/products/OrderName")
+    public ResponseEntity<List<Product>> orderByName() {
+        List<Product> productList = service.orderByName();
         return ResponseEntity.ok().body(productList);
     }
 

@@ -15,8 +15,6 @@ import java.util.Optional;
 public class ProductService {
     @Autowired private ProductRepository repo;
 
-    private Map<String, List<Product>> result = new HashMap<>();
-
     public List<Product> listAll(){
         return (List<Product>) repo.findAll();
     }
@@ -26,31 +24,33 @@ public class ProductService {
     }
 
     public List<Product> orderByPrice(){
-        List<Product> productsByPrice = repo.findAllByOrderByPrice();
-        result.put("menorPreco", productsByPrice);
-        return productsByPrice;
+        return repo.findAllByOrderByPrice();
     }
 
     public List<Product> orderByPriceDesc(){
-        List<Product> productsByPriceDesc = repo.findAllByOrderByPriceDesc();
-        result.put("maiorPreco", productsByPriceDesc);
-        return productsByPriceDesc;
+        return repo.findAllByOrderByPriceDesc();
     }
 
     public List<Product> orderByName(){
-        List<Product> productsByName = repo.findAllByOrderByName();
-        result.put("AZ", productsByName);
-        return productsByName;
+        return repo.findAllByOrderByName();
     }
 
     public List<Product> orderByNameDesc(){
-        List<Product> productsByNameDesc = repo.findAllByOrderByNameDesc();
-        result.put("ZA", productsByNameDesc);
-        return productsByNameDesc;
+        return repo.findAllByOrderByNameDesc();
     }
 
-    public List<Product> orderByCriteria(String type){
-        return result.get(type);
+    public Map<Integer, List<Product>> doAll() {
+        Map<Integer, List<Product>> result = new HashMap<>();
+        result.put(1, orderByPrice());
+        result.put(2,orderByName());
+        result.put(3,orderByNameDesc());
+        result.put(4,orderByPriceDesc());
+        return result;
+    }
+
+    public List<Product> orderByCriteria(Integer type){
+        Map<Integer, List<Product>> productMap = doAll();
+        return productMap.get(type);
     }
 
     public Product get(Integer id) throws ProductNotFoundException {

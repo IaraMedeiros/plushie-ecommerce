@@ -1,7 +1,9 @@
 package com.iaramedeiros.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
@@ -20,7 +22,7 @@ public class Product {
     @Column(nullable = false, unique = false)
 
     private Double price;
-
+    @JsonIgnore
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB",nullable = true, unique = true)
     private byte[] img;
@@ -113,5 +115,17 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", color='" + color + '\'' +
+                ", size='" + size + '\'' +
+                '}';
     }
 }
